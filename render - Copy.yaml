@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: inkloom-ai
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    # Free local container storage is ephemeral; see README.md for a persistent-disk setup.
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./inkloom.db
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
